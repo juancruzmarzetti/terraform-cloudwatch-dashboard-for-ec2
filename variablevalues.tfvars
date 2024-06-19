@@ -1,2 +1,3 @@
 name = "juan"
-vpc-id = "a-vpc-id"
+vpc-id = "your-vpc"
+email = "your-email"
