@@ -16,6 +16,10 @@ resource "aws_cloudwatch_metric_alarm" "foobar" {
   alarm_description         = "This metric monitors ec2 cpu utilization"
   alarm_actions             = [module.sns.sns_topic_arn]
   insufficient_data_actions = []
+
+  dimensions = {
+    InstanceId = aws_instance.juan-instance.id
+  }
 }
 
 resource "aws_sns_topic_subscription" "email_subscription" {
