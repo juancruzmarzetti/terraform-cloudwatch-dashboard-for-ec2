@@ -35,9 +35,10 @@ terraform destroy --var-file variablevalues.tfvars
 
 1. Conectarse mediante SSH desde la Consola de PowerShell como administradores a la instancia EC2 creada:
    ```sh
-   ssh -i ~/.ssh/id_rsa ec2-user@your-instance-public-ip
+   ssh -i ~/.ssh/id_rsa ubuntu@your-instance-public-ip
    ```
    (Reemplazar `your-instance-public-ip` por la IP Pública de la instancia EC2 que creamos).
+   Tip: donde dice "ubuntu" es un usuario que puede variar en las distribuciones de Linux/Unix dependiendo de la AMI, suele ser "ec2-user", "ubuntu" o "debian".
 
 2. En el comando anterior debemos contar con nuestro par de claves ssh-keygen. En nuestro archivo `keypair.tf` especificamos el nombre del par de claves y la clave la especificamos como nuestras llaves SSH Keygen (también se podría hacer con un archivo .pem en vez de este tipo de llaves). Si no contamos con claves SSH Keygen, las podemos generar fácilmente. ¿Cómo comprobarlo? Debemos ejecutar (desde Bash) el comando:
    ```sh
@@ -51,10 +52,13 @@ terraform destroy --var-file variablevalues.tfvars
 
 3. Una vez dentro de la instancia EC2, ejecutar:
    ```sh
-   sudo yum install stress -y
+   sudo apt update
+   sudo apt install stress
    stress -c 1 -t 1800s
    ```
    Esto generará un gran uso de CPU de la instancia EC2 durante 1800 segundos, con lo cual si la alarma funciona, debería enviarnos una notificación al chat #general de Slack y otra notificación a nuestro correo asociado con la alarma.
+   PD: el "update" es porque algunas AMIs no estan actualizadas con paquetes como lo son por ejemplo stress.
+   PD2: estos comandos pueden variar dependiendo la AMI. En este ejemplo se hacen con la AMI de la instancia que es una Debian.
 
 ---
 
@@ -109,7 +113,8 @@ terraform destroy --var-file variablevalues.tfvars
 
 3. Once inside the EC2 instance, run:
    ```sh
-   sudo yum install stress -y
+   sudo apt update
+   sudo apt install stress
    stress -c 1 -t 1800s
    ```
    This will generate high CPU usage of the EC2 instance for 1800 seconds, so if the alarm works, it should send us a notification to the #general Slack chat and another notification to our email associated with the alarm.
