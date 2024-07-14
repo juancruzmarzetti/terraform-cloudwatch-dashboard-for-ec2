@@ -3,6 +3,8 @@
 
 ## Español
 
+Configuración de Nivel Gratuito para Monitorear la Utilización de CPU de una Instancia AWS EC2. SNS notifica al correo asociado y al canal de chat #general de Slack.
+
 ### Ejecución
 
 1. Personalizar credenciales en AWS CLI y contar con Terraform CLI.
@@ -64,6 +66,8 @@ terraform destroy --var-file variablevalues.tfvars
 ---
 
 ## English
+
+Free Tier Configuration for Monitoring the CPU Utilization of an AWS EC2 Instance. SNS notificates to the associated mail and Slack´s #general chat channel
 
 ### Execution
 
